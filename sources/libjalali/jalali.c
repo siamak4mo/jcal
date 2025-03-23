@@ -62,6 +62,17 @@ extern char* tzname[2];
  */
 
 int jalali_is_jleap(int year)
+#if USE_LEAP33_ALGORITHM
+{
+  year -= 1210;
+  year %= 33;
+
+  if (year == 0)
+    return 1;
+
+  return (year % 4 == 0);
+}
+#else
 {
     int pr = year;
 
@@ -119,6 +130,7 @@ int jalali_is_jleap(int year)
      */
     return 0;
 }
+#endif /* USE_LEAP33_ALGORITHM */
 
 /*
  * Creates absolute values for day, hour, minute and seconds from time_t.
