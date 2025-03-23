@@ -260,6 +260,13 @@ size_t jstrftime(char* s, size_t max, const char* format, const struct jtm* jtm)
             rb++;
         } else {
             buf[0] = '\0';
+
+            int fa_len = 1;
+            while (i+1<fmt_n && format[i+1] == '0') {
+              i++;
+              fa_len = 2;
+            }
+
             switch (format[i+1]) {
                 /* The abbreviated weekday name. */
             case 'a':
@@ -306,7 +313,7 @@ size_t jstrftime(char* s, size_t max, const char* format, const struct jtm* jtm)
 
                 /* Equivalent to %d but in Farsi format. (utf8) */
             case 'f':
-                jalali_to_farsi(_l2, 100, 1, "۰", jtm->tm_mday);
+                jalali_to_farsi(_l2, 100, fa_len, "۰", jtm->tm_mday);
                 snprintf(buf, MAX_BUF_SIZE, "%s", _l2);
                 break;
 
@@ -409,7 +416,7 @@ size_t jstrftime(char* s, size_t max, const char* format, const struct jtm* jtm)
 
                 /* Equivalent to %y in Farsi format (utf8). */
             case 'J':
-                jalali_to_farsi(_la, 100, 1, "۰", jtm->tm_year);
+                jalali_to_farsi(_la, 100, fa_len, "۰", jtm->tm_year);
                 snprintf(buf, MAX_BUF_SIZE, "%s", _la);
                 break;
 
@@ -440,7 +447,7 @@ size_t jstrftime(char* s, size_t max, const char* format, const struct jtm* jtm)
 
                 /* Equivalent to %m but in Farsi format (utf8). */
             case 'o':
-                jalali_to_farsi(_l1, 100, 1, "۰", jtm->tm_mon + 1);
+                jalali_to_farsi(_l1, 100, fa_len, "۰", jtm->tm_mon + 1);
                 snprintf(buf, MAX_BUF_SIZE, "%s", _l1);
                 break;
 
