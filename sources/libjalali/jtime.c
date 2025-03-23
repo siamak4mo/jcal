@@ -304,6 +304,12 @@ size_t jstrftime(char* s, size_t max, const char* format, const struct jtm* jtm)
                 snprintf(buf, MAX_BUF_SIZE, "%02d", jtm->tm_mday);
                 break;
 
+                /* Equivalent to %d but in Farsi format. (utf8) */
+            case 'f':
+                jalali_to_farsi(_l2, 100, 1, "۰", jtm->tm_mday);
+                snprintf(buf, MAX_BUF_SIZE, "%s", _l2);
+                break;
+
                 /* Equivalent to %Y/%m/%d. */
             case 'D':
                 snprintf(buf, MAX_BUF_SIZE, "%d/%02d/%02d", jtm->tm_year,
@@ -401,6 +407,12 @@ size_t jstrftime(char* s, size_t max, const char* format, const struct jtm* jtm)
                 snprintf(buf, MAX_BUF_SIZE, "%03d", jtm->tm_yday + 1);
                 break;
 
+                /* Equivalent to %y in Farsi format (utf8). */
+            case 'J':
+                jalali_to_farsi(_la, 100, 1, "۰", jtm->tm_year);
+                snprintf(buf, MAX_BUF_SIZE, "%s", _la);
+                break;
+
                 /*
                  * The hour (24-hour clock) as a decimal number (range 0 to 23);
                  * single digits are preceded by a blank.
@@ -424,6 +436,12 @@ size_t jstrftime(char* s, size_t max, const char* format, const struct jtm* jtm)
                 /* The month as a decimal number (range 01 to 12). */
             case 'm':
                 snprintf(buf, MAX_BUF_SIZE, "%02d", jtm->tm_mon + 1);
+                break;
+
+                /* Equivalent to %m but in Farsi format (utf8). */
+            case 'o':
+                jalali_to_farsi(_l1, 100, 1, "۰", jtm->tm_mon + 1);
+                snprintf(buf, MAX_BUF_SIZE, "%s", _l1);
                 break;
 
                 /* The minute as a decimal number (range 00 to 59). */
