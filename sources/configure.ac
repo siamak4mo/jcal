@@ -45,6 +45,14 @@ AC_ARG_ENABLE([pyjalali],
                       *) AC_MSG_ERROR([Bad value $enableval for --enable-pyjalali]) ;;
               esac], installpyjalali="no")
 
+AC_ARG_ENABLE([leap33],
+              AC_HELP_STRING([--enable-leap33], [Use leap33 algorithm]),
+              [leap33_algorithm=$enableval], leap33_algorithm="no")
+
+if test "x$leap33_algorithm" = "xyes"; then
+    AC_DEFINE([USE_LEAP33_ALGORITHM], [1], [Define to use leap33])
+fi
+
 AC_ARG_WITH([python],
               AC_HELP_STRING([--with-python], [Python implementation to install python bindings for]),
               [foundimpl=0
