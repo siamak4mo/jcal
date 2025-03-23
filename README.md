@@ -7,3 +7,8 @@ libc implementations. Jalali calendar provides an API similar to that of libc's 
 
 Jalali calendar package consists of a library namely libjalali and two simple and easy to use terminal tools, jcal
 and jdate with functionality similar to UNIX cal and date.
+
+This modified version supports 33 years leap algorithm
+(pass `--enable-leap33` to the configure script).
+
+See <https://calendar.ut.ac.ir/Fa/News/Data/Doc/KabiseShamsi1206-1498-new.pdf> for more details.
